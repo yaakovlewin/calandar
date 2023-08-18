@@ -3,7 +3,6 @@ import {
     ChevronDownIcon,
     ChevronLeftIcon,
     ChevronRightIcon,
-    ClockIcon,
     EllipsisHorizontalIcon,
 } from "@heroicons/react/20/solid";
 import { Menu, Transition } from "@headlessui/react";
@@ -13,11 +12,57 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function CalendarHeader() {
+function getMonthName(month) {
+    // function to get month name
+    switch (month) {
+        case 0:
+            return "January";
+        case 1:
+            return "February";
+        case 2:
+            return "March";
+        case 3:
+            return "April";
+        case 4:
+            return "May";
+        case 5:
+            return "June";
+        case 6:
+            return "July";
+        case 7:
+            return "August";
+        case 8:
+            return "September";
+        case 9:
+            return "October";
+        case 10:
+            return "November";
+        default:
+            return "December";
+    }
+}
+
+export default function CalendarHeader({
+    handlePrevMonthClick,
+    handleNextMonthClick,
+    handleTodayClick,
+    handlePrevYearClick,
+    handleNextYearClick,
+    handleMonthChange,
+    handleYearChange,
+    selectedMonth,
+    selectedYear,
+    hebDate,
+}) {
     return (
         <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4 lg:flex-none">
             <h1 className="text-base font-semibold leading-6 text-gray-900">
-                <time dateTime="2022-01">January 2022</time>
+                <time dateTime="2022-01">
+                    {getMonthName(selectedMonth)} {selectedYear}
+                </time>
+            </h1>
+            <h1 className="text-base font-semibold leading-6 text-gray-900">
+                {`${hebDate[0].heDateParts.y} ${hebDate[0].heDateParts.m} - ${hebDate[1].heDateParts.m}`}
             </h1>
             <div className="flex items-center">
                 <div className="relative flex items-center rounded-md bg-white shadow-sm md:items-stretch">
@@ -27,6 +72,7 @@ export default function CalendarHeader() {
                     />
                     <button
                         type="button"
+                        onClick={handlePrevMonthClick}
                         className="flex items-center justify-center rounded-l-md py-2 pl-3 pr-4 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50"
                     >
                         <span className="sr-only">Previous month</span>
@@ -37,6 +83,7 @@ export default function CalendarHeader() {
                     </button>
                     <button
                         type="button"
+                        onClick={handleTodayClick}
                         className="hidden px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block"
                     >
                         Today
@@ -44,6 +91,7 @@ export default function CalendarHeader() {
                     <span className="relative -mx-px h-5 w-px bg-gray-300 md:hidden" />
                     <button
                         type="button"
+                        onClick={handleNextMonthClick}
                         className="flex items-center justify-center rounded-r-md py-2 pl-4 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50"
                     >
                         <span className="sr-only">Next month</span>
