@@ -1,14 +1,9 @@
 import { ClockIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 
-// import { days } from "../data/days";
 import generateDates from "../js/datesGenerator";
 import CalendarHeader from "./CalendarHeader";
 import MonthCalendar from "./MonthCalendar";
-import { h } from "@fullcalendar/core/preact";
-
-// const days = generateDates(0, 2022);
-// console.log(days);
 
 // const days = [
 //     { date: "2021-12-27", events: [] },
@@ -130,7 +125,6 @@ import { h } from "@fullcalendar/core/preact";
 //     { date: "2022-02-06", events: [] },
 // ];
 // const selectedDay = days.find((day) => day.isSelected);
-
 function classNames(...classes) {
     // function to add multiple classes
     return classes.filter(Boolean).join(" ");
@@ -142,13 +136,7 @@ export default function MonthView() {
     const [selectedYear, setSelectedYear] = useState(
         selectedDate.getFullYear()
     );
-    const [days, setDays] = useState(
-        [...Array(42)].map((_, i) => ({
-            date: "2021-12-27" + i,
-            events: [],
-            hebDate: { heDateParts: { d: i } },
-        }))
-    );
+    const [days, setDays] = useState([]);
     const [selectedDay, setSelectedDay] = useState(
         days.find((day) => day.isSelected)
     );
@@ -167,6 +155,7 @@ export default function MonthView() {
     function handleDateChange(date) {
         setSelectedDate(date);
         setSelectedMonth(date.getMonth());
+        setSelectedYear(date.getFullYear());
         // setSelectedYear(date.getFullYear());
         // setDays(generateDates(date.getMonth(), date.getFullYear()));
         // setSelectedDay(days.find((day) => day.isSelected));
@@ -180,8 +169,8 @@ export default function MonthView() {
 
     function handleYearChange(year) {
         setSelectedYear(year);
-        setDays(generateDates(selectedMonth, year));
-        setSelectedDay(days.find((day) => day.isSelected));
+        // setDays(generateDates(selectedMonth, year));
+        // setSelectedDay(days.find((day) => day.isSelected));
     }
 
     function handleDayClick(day) {
@@ -197,12 +186,21 @@ export default function MonthView() {
     }
 
     function handlePrevMonthClick() {
-        handleMonthChange(selectedMonth - 1);
+        if (selectedMonth === 0) {
+            handleMonthChange(11);
+            handleYearChange(selectedYear - 1);
+        } else {
+            handleMonthChange(selectedMonth - 1);
+        }
         console.log(selectedMonth);
     }
 
     function handleNextMonthClick() {
-        handleMonthChange(selectedMonth + 1);
+        if (selectedMonth === 11) {
+            handleMonthChange(0);
+            handleYearChange(selectedYear + 1);
+        } else handleMonthChange(selectedMonth + 1);
+        console.log(selectedMonth);
     }
 
     function handlePrevYearClick() {
@@ -229,7 +227,12 @@ export default function MonthView() {
                 handleYearChange={handleYearChange}
                 selectedMonth={selectedMonth}
                 selectedYear={selectedYear}
-                hebDate={[days[0].hebDate, days[days.length - 1].hebDate]}
+                hebDate={
+                    days.length > 0 && [
+                        days[0].hebDate,
+                        days[days.length - 1].hebDate,
+                    ]
+                }
             />
             <MonthCalendar days={days} classNames={classNames} />
 

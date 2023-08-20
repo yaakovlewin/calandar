@@ -1,5 +1,5 @@
-let converteDate = async (date) => {
-    let url = `https://www.hebcal.com/converter?cfg=json&date=${date}&g2h=1&strict=1`
+let converteDate = async (firstDate, lastDate) => {
+    let url = `https://www.hebcal.com/converter?cfg=json&start=${firstDate}&end=${lastDate}&g2h=1&lg=he-x-NoNikud`
     let hebDateObj = getData(url)
     return hebDateObj;
 
