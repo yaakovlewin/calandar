@@ -13,10 +13,10 @@ function getMonthRange(year, month) {
 // Function to get the Monday before a given date and the Sunday after a given date
 function getWeekRange(firstDay, lastDay) {
     const mondayBefore = new Date(firstDay);
-    mondayBefore.setDate(firstDay.getDate() - (firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1));
+    mondayBefore.setDate(firstDay.getDate() - (firstDay.getDay() === 6 ? 6 : firstDay.getDay()));
 
     const sundayAfter = new Date(lastDay);
-    sundayAfter.setDate(lastDay.getDate() + (lastDay.getDay() === 6 ? 0 : 7 - lastDay.getDay()));
+    sundayAfter.setDate(lastDay.getDate() + (lastDay.getDay() === 6 ? 0 : 6 - lastDay.getDay()));
 
     return { mondayBefore, sundayAfter };
 }
