@@ -1,5 +1,5 @@
 import hebcal from './hebcal-API';
-import generateDateRange from './getDateRange';
+import generateDateRange from './getDateRange2';
 import { isToday, isFriday, isSaturday } from 'date-fns'; // Import necessary date-fns functions
 import { DateTime } from 'luxon'; // Import DateTime from Luxon
 

@@ -62,7 +62,7 @@ export default function MonthCalendar({ days, classNames }) {
                                 className={classNames(
                                     day.isCurrentMonth
                                         ? "bg-white"
-                                        : "bg-gray-200 text-gray-500",
+                                        : "bg-gray-100 text-gray-500",
                                     "relative px-3 py-2 hover:bg-gray-100 h-24 rounded-lg shadow-lg max-w-xs w-full"
                                 )}
                             >
