@@ -1,41 +1,40 @@
-export default function MonthCalendar({ days, classNames }) {
+export default function MonthCalendar({
+    days,
+    handleDayClick,
+    handleDayDoubleClick,
+    handleDayRightClick,
+    classNames,
+}) {
     return (
         <div className="shadow ring-1 ring-black ring-opacity-5 lg:flex lg:flex-auto lg:flex-col">
-            <div className="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none">
-                <div className="bg-white py-2">
-                    S<span className="sr-only sm:not-sr-only">un</span>
+            <div className="grid grid-cols-7 gap-0 border-r-2 border-t-2 border-neutral-400 bg-neutral-400 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none">
+                <div className="bg-white py-2 border-l-2 border-neutral-400">
+                    S<span className="sr-only sm:not-sr-only ">un</span>
                 </div>
-                <div className="bg-white py-2">
+                <div className="bg-white py-2 border-l-2 border-neutral-400">
                     M<span className="sr-only sm:not-sr-only">on</span>
                 </div>
-                <div className="bg-white py-2">
+                <div className="bg-white py-2 border-l-2 border-neutral-400">
                     T<span className="sr-only sm:not-sr-only">ue</span>
                 </div>
-                <div className="bg-white py-2">
+                <div className="bg-white py-2 border-l-2 border-neutral-400">
                     W<span className="sr-only sm:not-sr-only">ed</span>
                 </div>
-                <div className="bg-white py-2">
+                <div className="bg-white py-2 border-l-2 border-neutral-400">
                     T<span className="sr-only sm:not-sr-only">hu</span>
                 </div>
-                <div className="bg-white py-2">
+                <div className="bg-white py-2 border-l-2 border-neutral-400">
                     F<span className="sr-only sm:not-sr-only">ri</span>
                 </div>
-                <div className="bg-white py-2">
+                <div className="bg-white py-2 border-l-2 border-neutral-400">
                     S<span className="sr-only sm:not-sr-only">at</span>
                 </div>
             </div>
-            <div className="flex bg-gray-200 text-xs leading-6 text-gray-700 lg:flex-auto">
-                <div
-                    className={classNames(
-                        days.length === 35
-                            ? "lg:grid lg:grid-cols-7 lg:grid-rows-5"
-                            : "lg:grid lg:grid-cols-7 lg:grid-rows-6",
-                        "hidden w-full lg:gap-px"
-                    )}
-                >
+            <div className="flex bg-neutral-400 text-xs leading-6 text-gray-700 lg:flex-auto">
+                <div className="hidden w-full lg:grid lg:grid-cols-7 lg:grid-rows-6 lg:gap-0 lg:border-r-2 lg:border-b-2 lg:border-neutral-400">
                     {days.length === 0 &&
                         // generate 35 days placeholders to fill the grid
-                        [...Array(35)].map((_, i) => (
+                        [...Array(42)].map((_, i) => (
                             <div
                                 className="bg-white dark:bg-slate-800 p-4 ring-1 ring-slate-900/5 rounded-lg shadow-lg max-w-xs w-full h-28 "
                                 key={i}
@@ -59,11 +58,16 @@ export default function MonthCalendar({ days, classNames }) {
                         days.map((day) => (
                             <div
                                 key={day.date}
+                                onClick={() => handleDayClick(day)}
+                                onDoubleClick={() => handleDayDoubleClick(day)}
+                                onContextMenu={(e) =>
+                                    handleDayRightClick(e, day)
+                                }
                                 className={classNames(
                                     day.isCurrentMonth
                                         ? "bg-white"
-                                        : "bg-gray-100 text-gray-500",
-                                    "relative px-3 py-2 hover:bg-gray-100 h-24 rounded-lg shadow-lg max-w-xs w-full"
+                                        : "bg-slate-100 text-gray-400 text-opacity-60",
+                                    "relative px-3 py-2 hover:bg-gray-100 h-24  max-w-xs w-full border-l-2 border-t-2 border-neutral-400"
                                 )}
                             >
                                 <time
@@ -82,7 +86,7 @@ export default function MonthCalendar({ days, classNames }) {
                                     }
                                 </time>
                                 {day.hebDate.heDateParts.d && (
-                                    <p className=" top-0 right-0 -mt-1 -mr-1 inline-flex float-right items-center justify-center px-2 py-1 text-xs font-medium leading-none text-white bg-indigo-500 rounded-full">
+                                    <p className=" top-0 right-0 inline-flex float-right items-center justify-center px-2 py-1 text-xs leading-none ">
                                         {day.hebDate.heDateParts.d}
                                     </p>
                                 )}
@@ -118,7 +122,7 @@ export default function MonthCalendar({ days, classNames }) {
                             </div>
                         ))}
                 </div>
-                <div className="isolate grid w-full grid-cols-7 grid-rows-6 gap-px lg:hidden">
+                <div className="isolate grid w-full grid-cols-7 grid-rows-6 gap-px bg-neutral-200 lg:hidden">
                     {days &&
                         days.map((day) => (
                             <button
@@ -165,7 +169,7 @@ export default function MonthCalendar({ days, classNames }) {
                                         .replace(/^0/, "")}
                                 </time>
                                 {day.hebDate.heDateParts.d && (
-                                    <p className=" top-0 right-0 -mt-1 -mr-1 inline-flex items-center justify-center px-2 py-1 text-xs font-medium leading-none text-white bg-indigo-600 rounded-full">
+                                    <p className=" top-0 right-0 -mt-1 -mr-1 inline-flex items-center justify-center px-2 py-1 text-xs font-medium leading-none">
                                         {day.hebDate.heDateParts.d}
                                     </p>
                                 )}

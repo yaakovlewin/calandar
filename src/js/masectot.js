@@ -1,0 +1,118 @@
+
+var masechtot = [{
+    name: 'ברכות',
+    pages: 62.5
+}, {
+    name: 'שבת',
+    pages: 156
+}, {
+    name: 'עירובין',
+    pages: 103.5
+}, {
+    name: 'פסחים',
+    pages: 120
+}, {
+    name: 'ר"ה',
+    pages: 33.5
+}, {
+    name: 'יומא',
+    pages: 86.5
+}, {
+    name: 'סוכה',
+    pages: 55
+}, {
+    name: 'ביצה',
+    pages: 38.5
+}, {
+    name: 'תענית',
+    pages: 29.5
+}, {
+    name: 'מגילה',
+    pages: 30.5
+}, {
+    name: 'מועד קטן',
+    pages: 27.5
+}, {
+    name: 'חגיגה',
+    pages: 25.5
+}, {
+    name: 'יבמות',
+    pages: 121
+}, {
+    name: 'כתובות',
+    pages: 111
+}, {
+    name: 'נדרים',
+    pages: 90
+}, {
+    name: 'נזיר',
+    pages: 65
+}, {
+    name: 'סוטה',
+    pages: 48
+}, {
+    name: 'גיטין',
+    pages: 89
+}, {
+    name: 'קידושין',
+    pages: 80.5
+}, {
+    name: 'בבא קמא',
+    pages: 118
+}, {
+    name: 'בבא מציעא',
+    pages: 117
+}, {
+    name: 'בבא בתרא',
+    pages: 174.5
+}, {
+    name: 'סנהדרין',
+    pages: 111.5
+}, {
+    name: 'מכות',
+    pages: 22.5
+}, {
+    name: 'שבועות',
+    pages: 48
+}, {
+    name: 'עבודה זרה',
+    pages: 75
+}, {
+    name: 'הוריות',
+    pages: 12.5
+}, {
+    name: 'זבחים',
+    pages: 119
+}, {
+    name: 'מנחות',
+    pages: 109
+}, {
+    name: 'חולין',
+    pages: 141
+}, {
+    name: 'בכורות',
+    pages: 60
+}, {
+    name: 'ערכין',
+    pages: 33
+}, {
+    name: 'תמורה',
+    pages: 33
+}, {
+    name: 'כריתות',
+    pages: 27
+}, {
+    name: 'מעילה',
+    pages: 20
+}, {
+    name: 'קינים',
+    pages: 3
+}, {
+    name: 'תמיד',
+    pages: 9
+}, {
+    name: 'נדה',
+    pages: 72
+}
+]
+export default masechtot

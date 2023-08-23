@@ -1,12 +1,15 @@
 import hebcal from './hebcal-API';
-import generateDateRange from './getDateRange2';
+import getMonthDisplayRange from './getMonthDisplayRange';
 import { isToday, isFriday, isSaturday } from 'date-fns'; // Import necessary date-fns functions
 import { DateTime } from 'luxon'; // Import DateTime from Luxon
+
+import getStudyScheduleEvent from './getStudyScheduleEvent';
+
 
 const generateDates = async (month, year) => {
     const dates = [];
 
-    const { firstDayToDisplay, lastDayToDisplay } = generateDateRange(month, year);
+    const { firstDayToDisplay, lastDayToDisplay } = getMonthDisplayRange(year, month, 0);
 
     const formattedFirstDayToDisplay = DateTime.fromJSDate(firstDayToDisplay);
     const formattedLastDayToDisplay = DateTime.fromJSDate(lastDayToDisplay);
@@ -16,6 +19,7 @@ const generateDates = async (month, year) => {
         formattedLastDayToDisplay.toISO()
     );
     const hebDatesObj = hebDates.hdates;
+
 
     let currentDatePointer = formattedFirstDayToDisplay;
 
@@ -30,7 +34,7 @@ const generateDates = async (month, year) => {
         dates.push({
             date: formattedDate.toISODate(),
             isToday: isTodayFlag,
-            events: [],
+            events: [getStudyScheduleEvent(new Date(2020, 0, 5), currentDatePointer.toJSDate())],
             isHoliday,
             isCurrentMonth,
             hebDate,
@@ -38,7 +42,7 @@ const generateDates = async (month, year) => {
 
         currentDatePointer = currentDatePointer.plus({ days: 1 });
     }
-
+    console.log(dates);
     return dates;
 };
 

@@ -178,11 +178,11 @@ export default function MonthView() {
     }
 
     function handleDayDoubleClick(day) {
-        console.log("double click");
+        console.log("double click " + day.date);
     }
 
     function handleDayRightClick(day) {
-        console.log("right click");
+        console.log("right click " + day);
     }
 
     function handlePrevMonthClick() {
@@ -234,7 +234,14 @@ export default function MonthView() {
                     ]
                 }
             />
-            <MonthCalendar days={days} classNames={classNames} />
+            <MonthCalendar
+                days={days}
+                handleDayClick={handleDayClick}
+                handleDayDoubleClick={handleDayDoubleClick}
+                handleDayRightClick={handleDayRightClick}
+                selectedDay={selectedDay}
+                classNames={classNames}
+            />
 
             {selectedDay?.events.length > 0 && (
                 <div className="px-4 py-10 sm:px-6 lg:hidden">
